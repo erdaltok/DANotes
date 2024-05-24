@@ -1,0 +1,69 @@
+.app_wrapper{
+    position: relative;
+}
+
+.dialog_wrapper{
+    
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    transition: top 250ms ;
+    >div{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        
+    justify-content: center;
+    align-items: center;
+        transition: top 250ms ;
+        position: absolute;
+    }
+}
+
+.dialog_open{
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: dialogOpen 250ms forwards;
+    >div{
+        top: 0;
+    }
+}
+
+.dialog_closed{
+
+    animation: dialogClose 350ms forwards;
+    >div{
+        top: 100%;
+    }
+}
+
+@keyframes dialogOpen {
+    from{
+        opacity: 0;
+        z-index: 1;
+    }
+    to{
+        opacity: 1;
+        z-index: 3;
+    }
+}
+
+
+@keyframes dialogClose {
+    from{
+        opacity: 1;
+        z-index: 3;
+    }
+    to{
+        opacity: 0;
+        z-index: 1;
+    }
+    
+}
+
+.z_index_m{
+    position: relative;
+    z-index: 2;
+}
+

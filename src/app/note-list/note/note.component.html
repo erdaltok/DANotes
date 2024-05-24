@@ -1,0 +1,49 @@
+<div class="note" (mouseenter)="hovered = true" (mouseleave)="deleteHovered()">
+    <input *ngIf="edit" [(ngModel)]="note.title" type="text">
+    <h3 *ngIf="!edit">
+        {{note.title}}
+    </h3>
+    <textarea *ngIf="edit" [(ngModel)]="note.content"></textarea>
+    <p *ngIf="!edit">
+        {{note.content}}
+    </p>
+    <div class="adjustments_wrapper">
+        <div>
+            <button class="orange_btn_round" *ngIf="note.marked && note.type == 'note'" (click)="changeMarkedStatus()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><g id="bookmark"><mask id="mask0_103_120" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_103_120)"><path id="bookmark_2" d="M5 21V5C5 4.45 5.19583 3.97917 5.5875 3.5875C5.97917 3.19583 6.45 3 7 3H17C17.55 3 18.0208 3.19583 18.4125 3.5875C18.8042 3.97917 19 4.45 19 5V21L12 18L5 21ZM7 17.95L12 15.8L17 17.95V5H7V17.95Z" fill="#FD5B4F"/></g></g></svg>
+            </button>
+        </div>
+        <div [ngClass]="{'slideIn': hovered}" class="adjustment_btns" [ngStyle]="{'width': note.marked? 'calc(100% - 32px)' : '100% '}">
+            <div>
+                <button class="white_btn_round" *ngIf="!note.marked && note.type == 'note'" (click)="changeMarkedStatus()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><g id="bookmark"><mask id="mask0_103_468" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_103_468)"><path id="bookmark_2" d="M5 21V5C5 4.45 5.19583 3.97917 5.5875 3.5875C5.97917 3.19583 6.45 3 7 3H17C17.55 3 18.0208 3.19583 18.4125 3.5875C18.8042 3.97917 19 4.45 19 5V21L12 18L5 21ZM7 17.95L12 15.8L17 17.95V5H7V17.95Z" fill="white"/></g></g></svg>
+                </button>
+            </div>
+
+            <div [ngSwitch]="true">
+                <ng-template [ngSwitchCase]="!edit && note.type == 'note'">
+                    <button class="white_btn_round" (click)="openEdit()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><g id="edit"><mask id="mask0_10_4412" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_10_4412)"><path id="edit_2" d="M5 19H6.4L15.025 10.375L13.625 8.975L5 17.6V19ZM19.3 8.925L15.05 4.725L16.45 3.325C16.8333 2.94167 17.3042 2.75 17.8625 2.75C18.4208 2.75 18.8917 2.94167 19.275 3.325L20.675 4.725C21.0583 5.10833 21.2583 5.57083 21.275 6.1125C21.2917 6.65417 21.1083 7.11667 20.725 7.5L19.3 8.925ZM4 21C3.71667 21 3.47917 20.9042 3.2875 20.7125C3.09583 20.5208 3 20.2833 3 20V17.175C3 17.0417 3.025 16.9125 3.075 16.7875C3.125 16.6625 3.2 16.55 3.3 16.45L13.6 6.15L17.85 10.4L7.55 20.7C7.45 20.8 7.3375 20.875 7.2125 20.925C7.0875 20.975 6.95833 21 6.825 21H4Z" fill="white"/></g></g></svg>
+                    </button>
+                    <button class="white_btn_round" (click)="moveToTrash()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><g id="delete"><mask id="mask0_10_4390" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_10_4390)"><path id="delete_2" d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6C4.71667 6 4.47917 5.90417 4.2875 5.7125C4.09583 5.52083 4 5.28333 4 5C4 4.71667 4.09583 4.47917 4.2875 4.2875C4.47917 4.09583 4.71667 4 5 4H9C9 3.71667 9.09583 3.47917 9.2875 3.2875C9.47917 3.09583 9.71667 3 10 3H14C14.2833 3 14.5208 3.09583 14.7125 3.2875C14.9042 3.47917 15 3.71667 15 4H19C19.2833 4 19.5208 4.09583 19.7125 4.2875C19.9042 4.47917 20 4.71667 20 5C20 5.28333 19.9042 5.52083 19.7125 5.7125C19.5208 5.90417 19.2833 6 19 6V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM17 6H7V19H17V6ZM9 17H11V8H9V17ZM13 17H15V8H13V17Z" fill="white"/></g></g></svg>
+                    </button>
+                </ng-template>
+                <ng-template [ngSwitchCase]="edit && note.type == 'note' ">
+                    <button (click)="closeEdit()" class="btn fullBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><g id="Filters icons"><mask id="mask0_103_222" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_103_222)"><path id="save" d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H16.175C16.4417 3 16.6958 3.05 16.9375 3.15C17.1792 3.25 17.3917 3.39167 17.575 3.575L20.425 6.425C20.6083 6.60833 20.75 6.82083 20.85 7.0625C20.95 7.30417 21 7.55833 21 7.825V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM19 7.85L16.15 5H5V19H19V7.85ZM12 18C12.8333 18 13.5417 17.7083 14.125 17.125C14.7083 16.5417 15 15.8333 15 15C15 14.1667 14.7083 13.4583 14.125 12.875C13.5417 12.2917 12.8333 12 12 12C11.1667 12 10.4583 12.2917 9.875 12.875C9.29167 13.4583 9 14.1667 9 15C9 15.8333 9.29167 16.5417 9.875 17.125C10.4583 17.7083 11.1667 18 12 18ZM7 10H14C14.2833 10 14.5208 9.90417 14.7125 9.7125C14.9042 9.52083 15 9.28333 15 9V7C15 6.71667 14.9042 6.47917 14.7125 6.2875C14.5208 6.09583 14.2833 6 14 6H7C6.71667 6 6.47917 6.09583 6.2875 6.2875C6.09583 6.47917 6 6.71667 6 7V9C6 9.28333 6.09583 9.52083 6.2875 9.7125C6.47917 9.90417 6.71667 10 7 10Z" fill="white"/></g></g></svg>
+                        <p>Save</p>
+                    </button>
+                </ng-template>
+                <ng-template [ngSwitchCase]="!edit && note.type == 'trash'">
+                    <button class="btn fullBtn" (click)="moveToNotes()">
+                        <p>Restore</p>
+                    </button>
+                    <button class="white_btn_round" (click)="deleteNote()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><g id="delete"><mask id="mask0_10_4390" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_10_4390)"><path id="delete_2" d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6C4.71667 6 4.47917 5.90417 4.2875 5.7125C4.09583 5.52083 4 5.28333 4 5C4 4.71667 4.09583 4.47917 4.2875 4.2875C4.47917 4.09583 4.71667 4 5 4H9C9 3.71667 9.09583 3.47917 9.2875 3.2875C9.47917 3.09583 9.71667 3 10 3H14C14.2833 3 14.5208 3.09583 14.7125 3.2875C14.9042 3.47917 15 3.71667 15 4H19C19.2833 4 19.5208 4.09583 19.7125 4.2875C19.9042 4.47917 20 4.71667 20 5C20 5.28333 19.9042 5.52083 19.7125 5.7125C19.5208 5.90417 19.2833 6 19 6V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM17 6H7V19H17V6ZM9 17H11V8H9V17ZM13 17H15V8H13V17Z" fill="white"/></g></g></svg>
+                    </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

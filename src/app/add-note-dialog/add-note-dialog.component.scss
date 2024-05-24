@@ -1,0 +1,106 @@
+.add_dialog_wrapper{
+    padding: 32px 64px;
+    width: 500px;
+    background-color: #09212A;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+@media screen and (max-width: 500px) {
+    .add_dialog_wrapper{
+        width: 100vw;
+        padding: 16px 32px;
+    }
+}
+
+.input_wrapper{
+    color: white;
+    >p{
+        font-size: 32px;
+        margin: 16px 0;
+    }
+    >input{
+        color: #B6C4C9;
+        outline: none;
+        border: none;
+        padding: 16px 16px;
+        border-radius: 16px;
+        width: 100%;
+        background-color: #0D3240;
+    }
+    >textarea{
+        color: #B6C4C9;
+        outline: none;
+        resize: none;
+        border: none;
+        padding: 16px 16px;
+        border-radius: 16px;
+        width: 100%;
+        background-color: #0D3240;
+    }
+}
+
+.btn_wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.btn{
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #FD5B4F;
+    color: #FD5B4F;
+    
+    border-radius: 24px;
+    padding: 16px 24px;
+    cursor: pointer;
+    >div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        width: 24px;
+        >svg {
+            margin-left: 8px;
+            height: 14px;
+            width: 14px;
+        };
+    }
+}
+
+.emptyBtn{
+    background-color: transparent;
+}
+
+.emptyBtn:hover {
+    color: white;
+    background-color: #FD5B4F;;
+}
+
+.emptyBtn:active {
+    color: white;
+    background-color: #FC2D1C;
+    border-color: #FC2D1C;
+}
+
+.fullBtn{
+    color: white;
+    background-color: #FD5B4F;;
+}
+
+.fullBtn:hover {
+    color: white;
+    background-color: #FC2D1C;
+    border-color: #FC2D1C;
+}
+
+.fullBtn:active {
+    color: white;
+    background-color: #FC2D1C;
+    border-color: #FC2D1C;
+}

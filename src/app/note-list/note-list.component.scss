@@ -1,0 +1,128 @@
+.notes_wrapper {
+    height: calc(100vh - 128px - 100px);
+    overflow-y: scroll;
+    background-color: #06171E;
+    padding: 16px;
+    >div:nth-child(2){
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
+.notes_list_button_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 32px;
+    >div:nth-child(1){
+        display: flex;
+        gap: 8px;
+    }
+    >div:nth-child(2){
+        display: flex;
+        gap: 8px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .notes_list_button_wrapper{
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+}
+
+.btn_active:enabled{
+    background-color: #124658 !important;
+    color: #6BC1E1 !important;
+}
+
+.btn{
+    margin-left: 8px ;
+    box-sizing: border-box;
+    height: 32px;
+    display: flex;
+    align-items: center; 
+    color: #B6C4C9;
+    border: none;
+    gap: 8px;
+    border-radius: 24px;
+    padding: 16px 16px;
+    border: 2px solid transparent;
+    background-color: #09212A;
+    cursor: pointer;
+    >svg {
+        height: 14px;
+        width: 14px;
+    };
+}
+
+.light_btn:disabled:hover {
+    border: 2px solid transparent !important;
+}
+
+.light_btn:disabled {
+    cursor: default;
+    background-color: #364449;
+
+}
+
+.light_btn:hover{
+    border: 2px solid #6BC1E1;
+}
+
+.trash_btn{
+    z-index: 2;
+    border: 2px solid #0D3240;
+}
+
+.trash_btn:hover{
+    border: 2px solid #6BC1E1;
+}
+
+.trash_btn_active{
+    color: white;
+    border: 2px solid #6BC1E1;
+}
+
+
+
+.back_arrow_active{
+    position: absolute;
+    left: -32px;
+}
+    
+.back_arrow_inactive{
+    position: absolute;
+    left: 16px;
+}
+
+.white_btn_round{
+    z-index: 1;
+    transition: all 250ms ease-in-out;
+    height: 32px;
+    border: none;
+    display: inline-flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.white_btn_round:hover{
+    background-color: #124658;
+}
+
+.white_btn_round:active{
+    background-color: #0D3240;
+}
+
