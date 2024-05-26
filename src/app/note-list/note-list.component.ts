@@ -12,8 +12,8 @@ export class NoteListComponent {
   favFilter: "all" | "fav" = "all";
   status: "notes" | "trash" = "notes";
 
-  constructor(private noteService: NoteListService) {
-    this.noteList = this.getDummyData()
+  constructor(public noteService: NoteListService) {
+    this.noteList = this.getDummyData();
   }
 
   changeFavFilter(filter: "all" | "fav") {
@@ -28,9 +28,6 @@ export class NoteListComponent {
       this.favFilter = "all";
     }
   }
-
-
-
 
   getDummyData(): Note[] {
     return [
