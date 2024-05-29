@@ -12,10 +12,11 @@ export class NoteComponent {
   edit = false;
   hovered = false;
   
-  constructor(public noteService: NoteListService){}
+  constructor(private noteService: NoteListService){}
 
   changeMarkedStatus(){
     this.note.marked = !this.note.marked;
+    this.saveNote();
   }
 
   deleteHovered(){
@@ -33,8 +34,15 @@ export class NoteComponent {
     this.saveNote();
   }
 
-  moveToTrash(){
-    this.note.type = 'trash';
+  moveToTrash() {
+    // debugger;
+   if (this.note.id) {
+     this.note.type = 'trash';
+     let docId = this.note.id;
+     delete this.note.id;
+     this.noteService.addNote(this.note, "trash");
+     this.noteService.deleteNote("notes", docId);
+   } 
   }
 
   moveToNotes(){
@@ -42,11 +50,13 @@ export class NoteComponent {
   }
 
   deleteNote(){
-
+  if (this.note.id) {
+     this.noteService.deleteNote("trash", this.note.id);
+   } 
   }
 
   saveNote(){
-    
+    this.noteService.updateNote(this.note)
   }
 
 }

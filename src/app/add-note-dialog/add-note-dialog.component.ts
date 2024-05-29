@@ -10,18 +10,29 @@ import { NoteListService } from '../firebase-services/note-list.service'
 export class AddNoteDialogComponent {
   @Output() addDialogClosed: EventEmitter<boolean> = new EventEmitter();
   title = "";
-  description = "";
+  content = "";
 
   constructor(private noteService: NoteListService){}
 
   closeDialog() {
     this.title = "";
-    this.description = "";
+    this.content = "";
     this.addDialogClosed.emit(false);
   }
 
-  addNote(){
-    //beachte das closeDialog() zum Schluss kommt, denn es leert die Variablen
+  addNote() {
+    let note:Note = {
+    type: "note",
+    title: this.title,
+    content: this.content,
+    marked: false,
+    }
+    if (note.type == "note") {
+      this.noteService.addNote(note, "notes");
+    } else {
+      this.noteService.addNote(note, "trash");
+    }
+  //beachte das closeDialog() zum Schluss kommt, denn es leert die Variablen
     this.closeDialog();
   }
 }
